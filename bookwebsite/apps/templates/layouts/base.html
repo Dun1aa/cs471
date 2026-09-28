@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+{% load static %}  <!-- حملت مكتبة static عشان أجيب الأيقونة والـ CSS لكل الصفحات من مكان واحد -->
+<head>
+  <title>{% block title %} {% endblock title %}</title>  <!-- كل صفحة بتكتب عنوانها هنا -->
+  <meta name="keywords" content="Books, recent, Learning, library">
+  <meta name="description" content="Books website">
+  <meta name="author" content="author name">
+  <link rel="icon" href="{% static 'qu-icon.png' %}">
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+  {% block stylesheets %}{% endblock stylesheets %}  <!-- مكان اختياري لأي CSS خاص بصفحة معينة مثل list_books -->
+</head>
+<body>
+
+    {% include "includes/header.html" %}  <!--  هنا يتحط الشريط العلوي من ملف header -->
+
+    {% block content %} {% endblock content %}  <!-- هنا يتحط محتوى كل صفحة -->
+
+    {% include "includes/footer.html" %}  <!-- هنا يتحط الفوتر من ملف footer -->
+</body>
+</html>
