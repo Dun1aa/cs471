@@ -1,0 +1,89 @@
+.link-row {
+  display: block;
+  padding: 20px;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+/* الرابط الأول: خلفية خضراء فاتحة ونص أحمر */
+#link1 {
+  background-color: #90EE90;
+  color: red;
+}
+#link1:visited {
+  color: darkred;
+}
+#link1:hover {
+  color: purple;/*اذا حطيت الموشر عليه*/
+}
+#link1:active {
+  color: orange;
+}
+
+/* الرابط الثاني: خلفية رمادية ونص أصفر */
+#link2 {
+  background-color: #555555;
+  color: yellow;
+}
+#link2:visited {
+  color: #cccc00;
+}
+#link2:hover {
+  color: white;
+}
+#link2:active {
+  color: orange;
+}
+
+/* الرابط الثالث: خلفية سوداء ونص أبيض */
+#link3 {
+  background-color: black;
+  color: white;
+}
+#link3:visited {
+  color: #aaaaaa;
+}
+#link3:hover {
+  color: yellow;
+}
+#link3:active {
+  color: red;
+}
+
+/* تنسيق صفحة الـ text formatting */
+.formatting-title {
+  color: green;
+  background-color: #f5f5dc;
+  padding: 15px;
+}
+
+
+/* تنسيق صفحة الـ listing */
+.listing-title {
+  color: white;
+  background-color: #5f9ea0;
+  padding: 20px;
+}
+
+
+/* تنسيق صفحة الجداول */
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 8px 15px;
+  text-align: center;
+}
+
+caption {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
