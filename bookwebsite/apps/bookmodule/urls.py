@@ -10,5 +10,6 @@ urlpatterns = [
     path('html5/links', views.html5_links, name="books.html5_links"),  # رابط صفحة الروابط حق لاب 5
     path('html5/text/formatting', views.html5_text_formatting, name="books.html5_text_formatting"),  # تاسك2 رابط صفحة تنسيق النص حق لاب 5
     path('html5/listing', views.html5_listing, name="books.html5_listing"),  #تاسك3 رابط صفحة القوائم حق لاب 5
-        path('html5/tables', views.html5_tables, name="books.html5_tables"),  # تاسك4 رابط صفحة الجداول حق لاب 5
+    path('html5/tables', views.html5_tables, name="books.html5_tables"),  # تاسك4 رابط صفحة الجداول حق لاب 5
+    path('search', views.search, name="books.search"),  #  رابط صفحة البحث حق لاب 6
 ]

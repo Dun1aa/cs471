@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}  <!-- جديد: صفحة نتائج البحث ترث الشكل العام من base.html -->
+
+{% block title %} Search Results {% endblock title %}
+
+{% block content %}
+  <h1>Search Results</h1>
+
+  {% if books %}
+    <ul>
+      {% for book in books %}
+        <li>
+          <h2>{{ book.title }}</h2>
+          <p>Author: {{ book.author }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No books found.</p>
+  {% endif %}
+{% endblock content %}
