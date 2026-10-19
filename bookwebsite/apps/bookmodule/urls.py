@@ -12,4 +12,7 @@ urlpatterns = [
     path('html5/listing', views.html5_listing, name="books.html5_listing"),  #تاسك3 رابط صفحة القوائم حق لاب 5
     path('html5/tables', views.html5_tables, name="books.html5_tables"),  # تاسك4 رابط صفحة الجداول حق لاب 5
     path('search', views.search, name="books.search"),  #  رابط صفحة البحث حق لاب 6
+    path("add/", views.add_book, name="add_book"), #حق لاب 7 تاسك2 ستيب 4
+    path("simple/query", views.simple_query, name="simple_query"),#لاب7 تاسك3 ستيب2
+    path("complex/query", views.complex_query, name="complex_query"),#لاب 7 ستيب4
 ]
