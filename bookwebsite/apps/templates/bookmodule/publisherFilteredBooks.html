@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Filtered Books{% endblock title %}
+
+{% block content %}
+<h1>Filtered Books by Publisher</h1>
+<p>Price greater than 50, quantity from 1 to 4.</p>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Publisher</th>
+        <th>Number of Matching Books</th>
+    </tr>
+
+    {% for publisher in publishers %}
+    <tr>
+        <td>{{ publisher.name }}</td>
+        <td>{{ publisher.matching_books_count }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">No publishers found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

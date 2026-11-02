@@ -1,0 +1,35 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Highly Rated Books{% endblock title %}
+
+{% block content %}
+<h1>Highly Rated Books by Publisher</h1>
+<p>Rating: 4 or higher</p>
+
+{% for publisher in publishers %}
+    <h2>{{ publisher.name }}</h2>
+    <p>Number of highly rated books: {{ publisher.highly_rated_count }}</p>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Quantity</th>
+        </tr>
+
+        {% for book in publisher.highly_rated_books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.rating }}</td>
+            <td>{{ book.quantity }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No highly rated books.</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% empty %}
+    <p>No publishers found.</p>
+{% endfor %}
+{% endblock content %}

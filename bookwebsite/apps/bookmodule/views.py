@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse  # نحتاجه لدالة index2 من لاب 3
-from .models import Book, Address, Student
+from .models import Book, Address, Student, Publisher
 from django.db.models import Q, Count, Sum, Avg, Max, Min
+from django.db.models import F, FloatField, ExpressionWrapper, Value
+from django.db.models import Prefetch
 # Create your views here.
 
 def index(request):
@@ -166,4 +168,103 @@ def lab8_task7(request):
         request,
         "bookmodule/studentsByCity.html",
         {"cities": cities}
+    )
+
+
+#لاب9 
+def lab9_task1(request):
+    total_stock = Book.objects.aggregate(total=Sum("quantity"))["total"] or 0
+
+    if total_stock > 0:
+        books = Book.objects.annotate(
+            availability=ExpressionWrapper(
+                F("quantity") * 100.0 / total_stock,
+                output_field=FloatField()
+            )
+        )
+    else:
+        books = Book.objects.annotate(
+            availability=Value(0.0, output_field=FloatField())
+        )
+
+    return render(
+        request,
+        "bookmodule/bookAvailability.html",
+        {"books": books, "total_stock": total_stock}
+    )
+
+
+def lab9_task2(request):
+    publishers = Publisher.objects.annotate(
+        total_stock=Sum("book__quantity", default=0)
+    ).order_by("name")
+
+    return render(
+        request,
+        "bookmodule/publisherStock.html",
+        {"publishers": publishers}
+    )
+
+def lab9_task3(request):
+    publishers = Publisher.objects.annotate(
+        oldest_pubdate=Min("book__pubdate")
+    ).order_by("name")
+
+    return render(
+        request,
+        "bookmodule/publisherOldest.html",
+        {"publishers": publishers}
+    )
+
+def lab9_task4(request):
+    publishers = Publisher.objects.annotate(
+        average_price=Avg("book__price"),
+        minimum_price=Min("book__price"),
+        maximum_price=Max("book__price")
+    ).order_by("name")
+
+    return render(
+        request,
+        "bookmodule/publisherPrices.html",
+        {"publishers": publishers}
+    )
+
+def lab9_task5(request):
+    highly_rated_books = Book.objects.filter(rating__gte=4)
+
+    publishers = Publisher.objects.annotate(
+        highly_rated_count=Count(
+            "book",
+            filter=Q(book__rating__gte=4)
+        )
+    ).prefetch_related(
+        Prefetch(
+            "book_set",
+            queryset=highly_rated_books,
+            to_attr="highly_rated_books"
+        )
+    ).order_by("name")
+
+    return render(
+        request,
+        "bookmodule/publisherRatings.html",
+        {"publishers": publishers}
+    )
+
+def lab9_task6(request):
+    publishers = Publisher.objects.annotate(
+        matching_books_count=Count(
+            "book",
+            filter=Q(
+                book__price__gt=50,
+                book__quantity__gte=1,
+                book__quantity__lt=5
+            )
+        )
+    ).order_by("name")
+
+    return render(
+        request,
+        "bookmodule/publisherFilteredBooks.html",
+        {"publishers": publishers}
     )

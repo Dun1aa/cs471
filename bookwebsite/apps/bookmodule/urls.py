@@ -21,4 +21,10 @@ urlpatterns = [
     path("lab8/task4", views.lab8_task4, name="lab8_task4"),#لاب8ستيب4
     path("lab8/task5", views.lab8_task5, name="lab8_task5"),#لاب8ستيب5
     path("lab8/task7", views.lab8_task7, name="lab8_task7"),#لاب8ستيب7
+    path("lab9/task1", views.lab9_task1, name="lab9_task1"),#لاب9 تاسك1
+    path("lab9/task2", views.lab9_task2, name="lab9_task2"),#لاب9تاسك2
+    path("lab9/task3", views.lab9_task3, name="lab9_task3"),#لاب9 تاسك3
+    path("lab9/task4", views.lab9_task4, name="lab9_task4"),#لاب9تاسك4
+    path("lab9/task5", views.lab9_task5, name="lab9_task5"),
+    path("lab9/task6", views.lab9_task6, name="lab9_task6"),
 ]

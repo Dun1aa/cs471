@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Book Availability{% endblock title %}
+
+{% block content %}
+<h1>Book Availability</h1>
+
+<p>Total stock: {{ total_stock }}</p>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Availability</th>
+    </tr>
+
+    {% for book in books %}
+    <tr>
+        <td>{{ book.title }}</td>
+        <td>{{ book.quantity }}</td>
+        <td>{{ book.availability|floatformat:2 }}%</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">No books found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
