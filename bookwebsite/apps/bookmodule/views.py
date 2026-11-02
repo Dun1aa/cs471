@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse  # نحتاجه لدالة index2 من لاب 3
-from .models import Book
+from .models import Book, Address, Student
+from django.db.models import Q, Count, Sum, Avg, Max, Min
 # Create your views here.
 
 def index(request):
@@ -91,3 +92,78 @@ def complex_query(request):#لاب 7 تاسك 4
         )
     else:
         return render(request, "bookmodule/index.html")
+
+
+def lab8_task1(request):
+    mybooks = Book.objects.filter(Q(price__lte=80))
+    return render(
+        request,
+        "bookmodule/bookList.html",
+        {"books": mybooks}
+    )
+
+
+def lab8_task2(request):
+    mybooks = Book.objects.filter(
+        Q(edition__gt=3) &
+        (Q(title__icontains="co") | Q(author__icontains="co"))
+    )
+
+    return render(
+        request,
+        "bookmodule/bookList.html",
+        {"books": mybooks}
+    )
+
+
+def lab8_task3(request):
+    mybooks = Book.objects.filter(
+        ~Q(edition__gt=3) &
+        (~Q(title__icontains="co") | ~Q(author__icontains="co"))
+    )
+
+    return render(
+        request,
+        "bookmodule/bookList.html",
+        {"books": mybooks}
+    )
+
+
+def lab8_task4(request):
+    mybooks = Book.objects.all().order_by("title")
+
+    return render(
+        request,
+        "bookmodule/bookList.html",
+        {"books": mybooks}
+    )
+
+
+def lab8_task5(request):
+    stats = Book.objects.aggregate(
+        total_books=Count("id"),
+        total_price=Sum("price"),
+        average_price=Avg("price"),
+        maximum_price=Max("price"),
+        minimum_price=Min("price")
+    )
+
+    return render(
+        request,
+        "bookmodule/bookStats.html",
+        {"stats": stats}
+    )
+
+def lab8_task7(request):
+    cities = (
+        Address.objects
+        .values("city")
+        .annotate(student_count=Count("student"))
+        .order_by("city")
+    )
+
+    return render(
+        request,
+        "bookmodule/studentsByCity.html",
+        {"cities": cities}
+    )

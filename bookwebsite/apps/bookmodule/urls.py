@@ -15,4 +15,10 @@ urlpatterns = [
     path("add/", views.add_book, name="add_book"), #حق لاب 7 تاسك2 ستيب 4
     path("simple/query", views.simple_query, name="simple_query"),#لاب7 تاسك3 ستيب2
     path("complex/query", views.complex_query, name="complex_query"),#لاب 7 ستيب4
+    path("lab8/task1", views.lab8_task1, name="lab8_task1"),#لاب 8 ستيب1
+    path("lab8/task2", views.lab8_task2, name="lab8_task2"),#لاب 8 ستيب2
+    path("lab8/task3", views.lab8_task3, name="lab8_task3"),#لاب8ستيب3
+    path("lab8/task4", views.lab8_task4, name="lab8_task4"),#لاب8ستيب4
+    path("lab8/task5", views.lab8_task5, name="lab8_task5"),#لاب8ستيب5
+    path("lab8/task7", views.lab8_task7, name="lab8_task7"),#لاب8ستيب7
 ]
